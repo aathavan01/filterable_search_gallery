@@ -1,1 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>fruits</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap');
 
+   *{
+      font-family: 'Montserrat', sans-serif;
+      margin:0; padding:0;
+      box-sizing: border-box;
+      outline: none; border:none;
+      text-decoration: none;
+      text-transform: capitalize;
+      transition: all .2s linear;
+   }
+   
+   body{
+     background-color: rgb(254, 249, 249);
+   }
+   
+   .container{
+     padding:20px 10%;
+     text-align: center;
+   }
+   
+   .container .heading{
+     font-size: 20px;
+     padding-bottom: 20px;
+   }
+   
+   .container #search-box{
+     background-color: darkblue;
+     color: #fff;
+     width: 350px;
+     border:3px solid #000;
+     padding:12px 15px;
+     font-size: 15px;
+   }
+   
+   .container .image-container{
+     display: flex;
+     justify-content: center;
+     flex-wrap: wrap;
+     gap:20px;
+     padding-top: 15px;
+   }
+   
+   .container .image-container .image{
+     padding:2px;
+     background-color: #fff;
+     box-shadow: 0 5px 5px rgba(0,0,0,.1);
+     border:2px solid #000;
+     width: 200px;
+     border-radius: 5px;
+     animation: fadeIn .2s linear;
+   }
+   
+   @keyframes fadeIn {
+     0%{
+       transform: scale(.5) translateY(-10px);
+       opacity: 0;
+     }
+   }
+   
+   .container .image-container .image img{
+     height: 250px;
+     width: 100%;
+     object-fit: cover;
+     margin-bottom: 10px;
+     border-radius: 5px;
+   }
+   
+   .container .image-container .image h3{
+     font-size: 20px;
+   }
+   
+   @media (max-width:768px){
+     .container #search-box{
+       width: 100%;
+     }
+   }
+   
+   @media (max-width:450px){
+   
+     .container{
+       padding:25px 20px;
+     }
+   
+     .container .image-container .image{
+       width: 100%;
+     }
+   }
+   </style>
+
+
+   <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
+    />
+   
+
+</head>
+<body>
+   
+<div class="container">
+
+   <h1 class="heading">fruits finder</h1>
+
+   <input type="text" placeholder="search images" id="search-box">
+   <button type="search"><i class="fas fa-search" style="color:darkblue ; font-size: 25px;" ></i> </button>
+   <button type="button"><i class="fas fa-random" style="color:darkblue; font-size: 25px; " onclick="getRandomImage()"></i> </button>
+
+   <div class="image-container">
+
+      <div class="image" data-title="ba" data-value="ban" data-value1="banana">
+         <img src="./images/banana.jpeg" alt="">
+
+        
+      </div>
+
+      <div class="image" data-title="gr" data-value="gra" data-value1="grapes">
+         <img src="./images/grapes.jpeg" alt="">
+         
+      </div>
+
+      <div class="image" data-title="ma" data-value="man" data-value1="mango">
+         <img src="./images/mango.jpg" alt="">
+      
+      </div>
+
+      <div class="image" data-title="ko" data-value="koi" data-value1="koiya">
+         <img src="./images/koiya.jpeg" alt="">
+      
+      </div>
+
+      <div class="image" data-title="ap" data-value="app" data-value1="apple">
+         <img src="./images/apple.jpg" alt="">
+        
+      </div>
+
+      <div class="image" data-title="na" data-value="naa" data-value1="naaval">
+         <img src="./images/naaval.jpeg" alt="">
+         
+      </div>
+
+      <div class="image" data-title="or" data-value="ora" data-value1="orange">
+         <img src="./images/orange.jpeg" alt="">
+       
+      </div>
+
+      <div class="image" data-title="pi" data-value="pin" data-value1="pineapple">
+         <img src="./images/pineapple.jpeg" alt="">
+         
+      </div>
+
+      <div class="image" data-title="ra   " data-value="ram" data-value1="ramput">
+         <img src="./images/ramput.jpeg" alt="">
+     
+      </div>
+
+   </div>
+
+</div>
+
+<script>
+   let searchBox = document.querySelector('#search-box');
+let images = document.querySelectorAll('.container .image-container .image');
+
+searchBox.oninput = () =>{
+   images.forEach(hide => hide.style.display = 'none');
+   let value = searchBox.value;
+   images.forEach(filter =>{
+      let title = filter.getAttribute("data-title");
+      let dataValue = filter.getAttribute("data-value");
+      let dataValue1 = filter.getAttribute("data-value1");
+      if (value == title) {
+        filter.style.display = "block";
+      } else if (searchBox.value == "") {
+        filter.style.display = "block";
+      } else if (searchBox.value == dataValue) {
+        filter.style.display = "block";
+      } else if (searchBox.value == dataValue1) {
+        filter.style.display = "block";
+      }
+    });
+  };
+
+
+
+function getRandomImage() {
+   var randomImage = new Array();
+   randomImage[0] = "images/banana.jpeg";
+   randomImage[1] = "images/grapes.jpeg";
+   randomImage[2] = "images/koiya.jpeg";
+   randomImage[3] = "images/apple.jpg";
+   for (let i = 0; i < 1; i++) {
+     var number = Math.floor(Math.random() * randomImage.length);
+     document.getElementById("result").innerHTML =
+       '<img src="' + randomImage[number] + '" style="width:600px" />';
+   }
+   document.getElementById("cont").style.display = "none";
+ }
+</script>
+
+</body>
+</html>
